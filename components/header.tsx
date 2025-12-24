@@ -22,10 +22,20 @@ const quickLinks = [
   { label: "Contact", href: "#contact" },
 ]
 
+const industries = [
+  { label: "Hotels", href: "#industries" },
+  { label: "Restaurants", href: "#industries" },
+  { label: "Schools", href: "#industries" },
+  { label: "Hospitals", href: "#industries" },
+  { label: "E-Commerce", href: "#industries" },
+  { label: "Corporate", href: "#industries" },
+]
+
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isFooterMenuOpen, setIsFooterMenuOpen] = useState(false)
+  const [isIndustriesDropdownOpen, setIsIndustriesDropdownOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,15 +62,44 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              if (item.label === "Industries") {
+                return (
+                  <div key={item.label} className="relative group">
+                    <button
+                      onClick={() => setIsIndustriesDropdownOpen(!isIndustriesDropdownOpen)}
+                      className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium flex items-center gap-1"
+                    >
+                      {item.label}
+                      <ChevronDown className="w-4 h-4" />
+                    </button>
+                    {isIndustriesDropdownOpen && (
+                      <div className="absolute left-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-lg z-40">
+                        {industries.map((industry) => (
+                          <Link
+                            key={industry.label}
+                            href={industry.href}
+                            className="block px-4 py-2 text-sm text-foreground hover:bg-secondary transition-colors first:rounded-t-lg last:rounded-b-lg"
+                            onClick={() => setIsIndustriesDropdownOpen(false)}
+                          >
+                            {industry.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )
+              }
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
+                >
+                  {item.label}
+                </Link>
+              )
+            })}
           </nav>
 
           {/* CTA Button and Footer Menu */}
