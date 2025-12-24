@@ -72,7 +72,7 @@ export function Stats() {
   return (
     <section ref={ref} className="py-16 lg:py-20 bg-secondary">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 gap-6 lg:gap-8 max-w-md mx-auto">
           {stats.map((stat, index) => (
             <StatItem
               key={index}
