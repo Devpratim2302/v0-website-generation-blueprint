@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Menu, X, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { CircularMenu } from "@/components/circular-menu"
 import { cn } from "@/lib/utils"
 
 const navItems = [
@@ -103,9 +102,31 @@ export function Header() {
             })}
           </nav>
 
-          {/* CTA Button and Circular Menu */}
-          <div className="hidden lg:flex items-center gap-4">
-            <CircularMenu />
+          {/* CTA Button and Footer Menu */}
+          <div className="hidden lg:flex items-center gap-3">
+            <div className="relative">
+              <button
+                onClick={() => setIsFooterMenuOpen(!isFooterMenuOpen)}
+                className="p-2 hover:bg-secondary rounded-md transition-colors"
+                aria-label="Toggle menu"
+              >
+                <ChevronDown className="w-5 h-5 text-foreground" />
+              </button>
+              {isFooterMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-lg z-40">
+                  {quickLinks.map((link) => (
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      className="block px-4 py-2 text-sm text-foreground hover:bg-secondary transition-colors first:rounded-t-lg last:rounded-b-lg"
+                      onClick={() => setIsFooterMenuOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
             <Button asChild>
               <Link href="#contact">Book a call</Link>
             </Button>
