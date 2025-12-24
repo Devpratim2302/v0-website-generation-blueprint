@@ -9,10 +9,12 @@ import { Testimonials } from "@/components/testimonials"
 import { FAQ } from "@/components/faq"
 import { ContactForm } from "@/components/contact-form"
 import { Footer } from "@/components/footer"
+import { SocialSidebar } from "@/components/social-sidebar"
 
 export default function Home() {
   return (
     <main className="min-h-screen">
+      <SocialSidebar />
       <Header />
       <Hero />
       <Stats />
