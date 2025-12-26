@@ -111,7 +111,7 @@ export function Header() {
                   <div key={item.label} className="relative group">
                     <button
                       onClick={() => setIsOpen(!isOpen)}
-                      className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium flex items-center gap-1"
+                      className="text-muted-foreground hover:text-primary transition-all text-sm font-medium flex items-center gap-1 px-4 py-2 rounded-lg hover:border hover:border-primary/50 hover:bg-primary/15"
                     >
                       {item.label}
                       <ChevronDown className="w-4 h-4" />
@@ -137,7 +137,7 @@ export function Header() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
+                  className="text-muted-foreground hover:text-primary transition-all text-sm font-medium px-4 py-2 rounded-lg hover:border hover:border-primary/50 hover:bg-primary/15"
                 >
                   {item.label}
                 </Link>

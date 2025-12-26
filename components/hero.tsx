@@ -6,24 +6,24 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
 const stats = [
-  { value: 5, label: "Projects Completed" },
-  { value: 1, label: "Years Experience" },
-  { value: 10, label: "Employees" },
-  { value: 100, label: "Client Satisfaction", suffix: "%" },
+  { value: "5+", label: "Projects Delivered", isText: true, suffix: "" },
+  { value: "Growth-Focused", label: "Strategy", isText: true, suffix: "" },
+  { value: "Senior Team", label: "Only", isText: true, suffix: "" },
 ]
 
 type StatItemProps = {
-  value: number
+  value: number | string
   label: string
   suffix?: string
   show: boolean
+  isText?: boolean
 }
 
-function StatItem({ value, label, suffix = "", show }: StatItemProps) {
+function StatItem({ value, label, suffix = "", show, isText = false }: StatItemProps) {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
-    if (show) {
+    if (show && !isText && typeof value === 'number') {
       const duration = 2000
       const steps = 60
       const increment = value / steps
@@ -39,15 +39,15 @@ function StatItem({ value, label, suffix = "", show }: StatItemProps) {
       }, duration / steps)
       return () => clearInterval(timer)
     }
-  }, [show, value])
+  }, [show, value, isText])
 
   return (
-    <div className="text-center p-4 bg-white/10 backdrop-blur-md rounded-lg border border-white/20">
-      <div className="text-3xl lg:text-4xl font-bold text-white mb-1">
-        {count}
+    <div className="text-center px-3 py-2 bg-white/10 backdrop-blur-md rounded-lg border border-white/20">
+      <div className="text-lg lg:text-xl font-bold text-white mb-0">
+        {isText ? value : count}
         {suffix}
       </div>
-      <div className="text-white/80 text-sm font-medium">{label}</div>
+      <div className="text-white/80 text-[10px] font-medium">{label}</div>
     </div>
   )
 }
@@ -108,7 +108,7 @@ export function Hero() {
 
           {/* Right side - Stats with delay animation */}
           <div
-            className={`hidden lg:flex flex-col gap-4 transition-all duration-1000 ${showStats ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+            className={`hidden lg:flex flex-col gap-2 transition-all duration-1000 ${showStats ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
               }`}
           >
             {stats.map((stat, index) => (
@@ -118,6 +118,7 @@ export function Hero() {
                 label={stat.label}
                 suffix={stat.suffix}
                 show={showStats}
+                isText={stat.isText}
               />
             ))}
           </div>
