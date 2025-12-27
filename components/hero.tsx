@@ -107,10 +107,9 @@ export function Hero() {
           </div>
 
           {/* Right side - Stats with delay animation */}
-          <div
-            className={`hidden lg:flex flex-col gap-5 transition-all duration-1000 ${showStats ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-              }`}
-          >
+            <div
+              className={`hidden lg:flex flex-col gap-5 transition-all duration-1000 ${showStats ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'} absolute right-6 top-24`}
+            >
             {stats.map((stat, index) => (
               <StatItem
                 key={index}
