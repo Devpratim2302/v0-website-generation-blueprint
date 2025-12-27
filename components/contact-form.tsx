@@ -24,7 +24,7 @@ const serviceOptions = [
   "Full Digital Strategy",
 ]
 
-const budgetRanges = ["$5,000 - $10,000", "$10,000 - $25,000", "$25,000 - $50,000", "$50,000 - $100,000", "$100,000+"]
+const budgetRanges = ["₹5,00,000 - ₹10,00,000", "₹10,00,000 - ₹25,00,000", "₹25,00,000 - ₹50,00,000", "₹50,00,000 - ₹1,00,00,000", "₹1,00,00,000+"]
 
 const timelines = ["ASAP", "Within 1 month", "1-3 months", "3-6 months", "Just exploring"]
 
@@ -71,11 +71,11 @@ export function ContactForm() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="name">Full Name *</Label>
-                  <Input id="name" placeholder="John Doe" required />
+                  <Input id="name" placeholder="Client Name" required />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="phone">Phone Number</Label>
-                  <Input id="phone" type="tel" placeholder="+1 (555) 000-0000" />
+                  <Input id="phone" type="tel" placeholder="+91 9xxxx xxxxx" />
                 </div>
               </div>
 
@@ -83,7 +83,7 @@ export function ContactForm() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="email">Email Address *</Label>
-                  <Input id="email" type="email" placeholder="john@example.com" required />
+                  <Input id="email" type="email" placeholder="client@example.com" required />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="company">Company Name</Label>

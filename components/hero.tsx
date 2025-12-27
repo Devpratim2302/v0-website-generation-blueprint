@@ -42,12 +42,12 @@ function StatItem({ value, label, suffix = "", show, isText = false }: StatItemP
   }, [show, value, isText])
 
   return (
-    <div className="text-center px-3 py-2 bg-white/10 backdrop-blur-md rounded-lg border border-white/20">
-      <div className="text-lg lg:text-xl font-bold text-white mb-0">
+    <div className="w-[320px] rounded-xl bg-primary/85 text-white px-6 py-5 shadow-2xl border border-white/20 backdrop-blur-sm">
+      <div className={`${isText ? 'text-3xl' : 'text-4xl'} font-extrabold tracking-tight`}>
         {isText ? value : count}
         {suffix}
       </div>
-      <div className="text-white/80 text-[10px] font-medium">{label}</div>
+      <div className="mt-2 text-base font-semibold">{label}</div>
     </div>
   )
 }
@@ -107,10 +107,9 @@ export function Hero() {
           </div>
 
           {/* Right side - Stats with delay animation */}
-          <div
-            className={`hidden lg:flex flex-col gap-2 transition-all duration-1000 ${showStats ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-              }`}
-          >
+            <div
+              className={`hidden lg:flex flex-col gap-5 transition-all duration-1000 ${showStats ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'} absolute right-6 top-24`}
+            >
             {stats.map((stat, index) => (
               <StatItem
                 key={index}
