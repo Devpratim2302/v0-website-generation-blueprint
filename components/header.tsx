@@ -7,59 +7,35 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "#process", hasDropdown: true },
-  { label: "Industries", href: "#industries", hasDropdown: true },
-  { label: "Portfolio", href: "#portfolio", hasDropdown: true },
+  { label: "Industries", href: "#industries" },
+  { label: "Portfolio", href: "#clients" },
+  { label: "Our Projects", href: "#process" },
   { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact", href: "#contact" },
 ]
 
 const quickLinks = [
-  { label: "Services", href: "#process" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Process", href: "#process" },
+  { label: "Services", href: "#services" },
+  { label: "Portfolio", href: "#clients" },
+  { label: "Our Projects", href: "#process" },
   { label: "Testimonials", href: "#testimonials" },
+  { label: "Careers", href: "#careers" },
   { label: "Contact", href: "#contact" },
 ]
 
-const services: { label: string; href: string }[] = [
-  { label: "Web Design", href: "/services/web-design" },
-  { label: "E-Commerce", href: "/services/e-commerce" },
-  { label: "SEO", href: "/services/seo" },
-  { label: "Lead Management", href: "/services/lead-management" },
-  { label: "Social Media Marketing", href: "/services/social-media-marketing" },
-  { label: "Conversion & Optimization", href: "/services/conversion-optimization" },
-  { label: "PPC (Pay Per Click)", href: "/services/ppc" },
-  { label: "CRM Solutions", href: "/services/crm-solutions" },
-  { label: "Data Analytics", href: "/services/data-analytics" },
-]
-
 const industries = [
-  { label: "Hotels", href: "/industries/hotels" },
-  { label: "Restaurants", href: "/industries/restaurants" },
-  { label: "Schools", href: "/industries/schools" },
-  { label: "Hospitals", href: "/industries/hospitals" },
-  { label: "E-Commerce", href: "/industries/e-commerce" },
-  { label: "Corporate", href: "/industries/corporate" },
-]
-
-const portfolioItems: { label: string; href: string }[] = [
-  { label: "Veerance", href: "/portfolio/veerance" },
-  { label: "Anchor Space", href: "/portfolio/anchor-space" },
-  { label: "Raksha Safety App", href: "/portfolio/raksha-safety-app" },
-  { label: "Aditi Infrastructures", href: "/portfolio/aditi-infrastructures" },
-  { label: "ARK Industries", href: "/portfolio/ark-industries" },
-  { label: "Habit Tracker App", href: "/portfolio/habit-tracker-app" },
+  { label: "Hotels", href: "#industries" },
+  { label: "Restaurants", href: "#industries" },
+  { label: "Schools", href: "#industries" },
+  { label: "Hospitals", href: "#industries" },
+  { label: "E-Commerce", href: "#industries" },
+  { label: "Corporate", href: "#industries" },
 ]
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isFooterMenuOpen, setIsFooterMenuOpen] = useState(false)
-  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false)
   const [isIndustriesDropdownOpen, setIsIndustriesDropdownOpen] = useState(false)
-  const [isPortfolioDropdownOpen, setIsPortfolioDropdownOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,7 +49,7 @@ export function Header() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled ? "bg-background/98 backdrop-blur-lg shadow-lg" : "bg-background/80 backdrop-blur-md shadow-sm",
+        isScrolled ? "bg-background/95 backdrop-blur-md shadow-sm" : "bg-transparent",
       )}
     >
       <div className="container mx-auto px-4 lg:px-8">
@@ -87,45 +63,26 @@ export function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
             {navItems.map((item) => {
-              if (item.hasDropdown) {
-                // Determine which dropdown data and state to use
-                let dropdownItems: typeof services = []
-                let isOpen = false
-                let setIsOpen: (value: boolean) => void = () => { }
-
-                if (item.label === "Services") {
-                  dropdownItems = services
-                  isOpen = isServicesDropdownOpen
-                  setIsOpen = setIsServicesDropdownOpen
-                } else if (item.label === "Industries") {
-                  dropdownItems = industries
-                  isOpen = isIndustriesDropdownOpen
-                  setIsOpen = setIsIndustriesDropdownOpen
-                } else if (item.label === "Portfolio") {
-                  dropdownItems = portfolioItems
-                  isOpen = isPortfolioDropdownOpen
-                  setIsOpen = setIsPortfolioDropdownOpen
-                }
-
+              if (item.label === "Industries") {
                 return (
                   <div key={item.label} className="relative group">
                     <button
-                      onClick={() => setIsOpen(!isOpen)}
-                      className="text-muted-foreground hover:text-primary transition-all text-sm font-medium flex items-center gap-1 px-4 py-2 rounded-lg hover:border hover:border-primary/50 hover:bg-primary/15"
+                      onClick={() => setIsIndustriesDropdownOpen(!isIndustriesDropdownOpen)}
+                      className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium flex items-center gap-1"
                     >
                       {item.label}
                       <ChevronDown className="w-4 h-4" />
                     </button>
-                    {isOpen && dropdownItems.length > 0 && (
+                    {isIndustriesDropdownOpen && (
                       <div className="absolute left-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-lg z-40">
-                        {dropdownItems.map((dropdownItem) => (
+                        {industries.map((industry) => (
                           <Link
-                            key={dropdownItem.label}
-                            href={dropdownItem.href}
+                            key={industry.label}
+                            href={industry.href}
                             className="block px-4 py-2 text-sm text-foreground hover:bg-secondary transition-colors first:rounded-t-lg last:rounded-b-lg"
-                            onClick={() => setIsOpen(false)}
+                            onClick={() => setIsIndustriesDropdownOpen(false)}
                           >
-                            {dropdownItem.label}
+                            {industry.label}
                           </Link>
                         ))}
                       </div>
@@ -137,7 +94,7 @@ export function Header() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="text-muted-foreground hover:text-primary transition-all text-sm font-medium px-4 py-2 rounded-lg hover:border hover:border-primary/50 hover:bg-primary/15"
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
                 >
                   {item.label}
                 </Link>
@@ -145,18 +102,15 @@ export function Header() {
             })}
           </nav>
 
-          {/* CTA Button and Hamburger Menu */}
+          {/* CTA Button and Footer Menu */}
           <div className="hidden lg:flex items-center gap-3">
-            <Button asChild>
-              <Link href="#contact">Book a call</Link>
-            </Button>
             <div className="relative">
               <button
                 onClick={() => setIsFooterMenuOpen(!isFooterMenuOpen)}
                 className="p-2 hover:bg-secondary rounded-md transition-colors"
                 aria-label="Toggle menu"
               >
-                <Menu className="w-5 h-5 text-foreground" />
+                <ChevronDown className="w-5 h-5 text-foreground" />
               </button>
               {isFooterMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-lg z-40">
@@ -173,6 +127,9 @@ export function Header() {
                 </div>
               )}
             </div>
+            <Button asChild>
+              <Link href="#contact">Book a call</Link>
+            </Button>
           </div>
 
           {/* Mobile Menu Toggle */}
