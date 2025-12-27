@@ -55,7 +55,7 @@ export function Footer() {
   return (
     <footer className="bg-background text-foreground py-12 lg:py-16">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Company Info */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
@@ -104,7 +104,7 @@ export function Footer() {
                 <li key={item.label}>
                   {item.hasDropdown ? (
                     <div className="group relative">
-                      <button className="text-muted-foreground hover:text-primary transition-colors text-left">
+                      <button className="font-semibold text-foreground hover:text-primary transition-colors text-left">
                         {item.label}
                       </button>
                       <ul className="ml-4 mt-2 space-y-2 hidden group-hover:block">
@@ -139,13 +139,15 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-            <div className="mt-6 space-y-2">
-              <h4 className="font-semibold text-lg text-foreground">Reach out to us anytime</h4>
-              <ul className="space-y-1 text-muted-foreground">
-                <li><a href="mailto:info@govira.com" className="hover:text-primary">info@govira.com</a></li>
-                <li>INDIA +91 8899888088</li>
-              </ul>
-            </div>
+          </div>
+
+          {/* Reach out to us */}
+          <div>
+            <h4 className="font-semibold text-lg mb-4 text-foreground">Reach out to us anytime</h4>
+            <ul className="space-y-3 text-muted-foreground">
+              <li><a href="mailto:info@govira.com" className="hover:text-primary transition-colors">info@govira.com</a></li>
+              <li>INDIA +91 8899888088</li>
+            </ul>
           </div>
         </div>
 
