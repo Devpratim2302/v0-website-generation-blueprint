@@ -6,53 +6,56 @@ const projects = [
   {
     id: 1,
     title: "Veerance",
+    category: "E-Commerce Platform",
+    description: "Modern online store with seamless checkout and clothes catalog",
     image: "/veerance.png",
     href: "/portfolio/veerance",
   },
   {
     id: 2,
     title: "Anchor Space",
+    category: "Website",
+    description: "Complete business website with functional website for a co-working space",
     image: "/anchor-space.png",
     href: "/portfolio/anchor-space",
   },
   {
     id: 3,
-    title: "Raksha Safety App",
+    title: "Raksha Saftey App",
+    category: "Mobile App",
+    description: "iOS and Android app for personal safety with real-time location tracking",
     image: "/raksha-safety-app.jpg",
     href: "/portfolio/raksha-safety-app",
   },
   {
     id: 4,
     title: "Aditi Infrastructures",
+    category: "Website",
+    description: "Aditi Infrastructures is a leading real estate developer specializing in residential and commercial properties",
     image: "/aditi-infrastructures.jpg",
     href: "/portfolio/aditi-infrastructures",
   },
   {
     id: 5,
     title: "ARK Industries",
+    category: "Website",
+    description: "Manufacturing company website with fastening products and solutions",
     image: "/ark-industries.png",
     href: "/portfolio/ark-industries",
   },
   {
     id: 6,
     title: "Habit Tracker App",
+    category: "Mobile App",
+    description: "Comprehensive health and fitness tracking app for iOS and Android",
     image: "/habit-tracker.png",
     href: "/portfolio/habit-tracker-app",
   },
 ]
 
-const companies = [
-  "Veerance",
-  "Anchor Space",
-  "Raksha",
-  "Aditi Infrastructures",
-  "ARK Industries",
-  "Habit Tracker",
-]
-
 export function Portfolio() {
   return (
-    <section id="portfolio" className="py-16 lg:py-24 bg-background overflow-hidden">
+    <section id="portfolio" className="py-16 lg:py-24 bg-background">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-12 lg:mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-foreground">Our Portfolio</h2>
@@ -61,58 +64,73 @@ export function Portfolio() {
           </p>
         </div>
 
-        {/* Line 1: Small Grid Images + Horizontal Scrolling Text */}
-        <div className="flex items-center gap-8 mb-16">
-          {/* Small Grid of Images */}
-          <div className="grid grid-cols-2 gap-3 flex-shrink-0 w-64">
-            {projects.slice(0, 4).map((project) => (
+        <div className="w-full">
+          <div className="flex gap-4 lg:gap-6 justify-center">
+            {projects.map((project) => (
               <Link
                 key={project.id}
                 href={project.href}
-                className="group relative aspect-square rounded-lg overflow-hidden"
+                className="group relative overflow-hidden rounded-xl bg-card hover:shadow-2xl transition-all duration-300 flex-1 max-w-[200px]"
               >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-3 lg:p-4 text-white">
+                  <p className="text-xs font-medium text-white mb-1">{project.category}</p>
+                  <h3 className="text-sm lg:text-base font-bold mb-2">{project.title}</h3>
+                  <p className="text-xs text-gray-300 line-clamp-2">{project.description}</p>
+                </div>
               </Link>
             ))}
           </div>
+        </div>
 
-          {/* Horizontal Scrolling Text */}
-          <div className="flex-1 overflow-hidden">
-            <div className="animate-scroll-horizontal whitespace-nowrap">
-              {[...Array(3)].map((_, i) => (
-                <span key={i} className="inline-block">
-                  {projects.map((project) => (
-                    <span
-                      key={`${i}-${project.id}`}
-                      className="text-4xl lg:text-6xl font-bold text-foreground/10 mx-8"
-                    >
+        {/* Horizontal Scrolling Marquee - First Row (Right to Left) - Logos + Names */}
+        <div className="mt-16 overflow-hidden border-t border-border py-10">
+          <div className="animate-marquee-reverse whitespace-nowrap">
+            {[...Array(4)].map((_, i) => (
+              <span key={i} className="inline-block">
+                {projects.map((project, idx) => (
+                  <span
+                    key={`logo-name-${i}-${idx}`}
+                    className="inline-flex items-center mx-12"
+                  >
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-24 h-24 rounded-lg object-cover hover:scale-110 transition-transform duration-300"
+                    />
+                    <span className="ml-6 text-3xl font-bold text-foreground">
                       {project.title}
                     </span>
-                  ))}
-                </span>
-              ))}
-            </div>
+                    <span className="ml-12 text-2xl text-muted-foreground">•</span>
+                  </span>
+                ))}
+              </span>
+            ))}
           </div>
         </div>
 
-        {/* Line 2: Company Symbols with Horizontal Scrolling */}
-        <div className="overflow-hidden border-t border-b border-border py-8">
-          <div className="animate-scroll-horizontal-slow whitespace-nowrap">
-            {[...Array(3)].map((_, i) => (
+        {/* Horizontal Scrolling Marquee - Second Row (Left to Right) - Logos Only */}
+        <div className="overflow-hidden border-t border-b border-border py-10">
+          <div className="animate-marquee whitespace-nowrap">
+            {[...Array(4)].map((_, i) => (
               <span key={i} className="inline-block">
-                {companies.map((company, idx) => (
+                {projects.map((project, idx) => (
                   <span
-                    key={`${i}-${idx}`}
+                    key={`logo-${i}-${idx}`}
                     className="inline-flex items-center mx-12"
                   >
-                    <span className="text-2xl font-semibold text-muted-foreground hover:text-primary transition-colors cursor-pointer">
-                      {company}
-                    </span>
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-24 h-24 rounded-lg object-cover hover:scale-110 transition-transform duration-300"
+                    />
                   </span>
                 ))}
               </span>
@@ -122,7 +140,7 @@ export function Portfolio() {
       </div>
 
       <style jsx>{`
-        @keyframes scroll-horizontal {
+        @keyframes marquee {
           0% {
             transform: translateX(0);
           }
@@ -131,25 +149,25 @@ export function Portfolio() {
           }
         }
 
-        @keyframes scroll-horizontal-slow {
+        @keyframes marquee-reverse {
           0% {
-            transform: translateX(0);
-          }
-          100% {
             transform: translateX(-33.333%);
           }
+          100% {
+            transform: translateX(0);
+          }
         }
 
-        .animate-scroll-horizontal {
-          animation: scroll-horizontal 30s linear infinite;
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
         }
 
-        .animate-scroll-horizontal-slow {
-          animation: scroll-horizontal-slow 40s linear infinite;
+        .animate-marquee-reverse {
+          animation: marquee-reverse 30s linear infinite;
         }
 
-        .animate-scroll-horizontal:hover,
-        .animate-scroll-horizontal-slow:hover {
+        .animate-marquee:hover,
+        .animate-marquee-reverse:hover {
           animation-play-state: paused;
         }
       `}</style>

@@ -100,17 +100,21 @@ export function BookingPopup({ isOpen, onClose }: BookingPopupProps) {
         // Only allow digits and spaces
         const cleanValue = value.replace(/[^\d\s]/g, "")
         setPhoneNumber(cleanValue)
+        // Clear error while typing
+        setPhoneError("")
+    }
 
-        if (cleanValue) {
-            validatePhoneNumber(cleanValue, countryCode)
-        } else {
-            setPhoneError("")
+    const handlePhoneBlur = () => {
+        // Validate only when user finishes entering the number
+        if (phoneNumber) {
+            validatePhoneNumber(phoneNumber, countryCode)
         }
     }
 
     const handleCountryCodeChange = (value: string) => {
         setCountryCode(value)
-        if (phoneNumber) {
+        // Only validate if phone number exists and user has finished entering it
+        if (phoneNumber && phoneError) {
             validatePhoneNumber(phoneNumber, value)
         }
     }
@@ -139,8 +143,14 @@ export function BookingPopup({ isOpen, onClose }: BookingPopupProps) {
     if (!isOpen) return null
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto">
-            <div className="relative bg-white rounded-lg shadow-2xl w-full max-w-4xl my-8">
+        <div
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto"
+            onClick={onClose}
+        >
+            <div
+                className="relative bg-white rounded-lg shadow-2xl w-full max-w-4xl my-8"
+                onClick={(e) => e.stopPropagation()}
+            >
                 {/* Header */}
                 <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between rounded-t-lg">
                     <h2 className="text-xl font-bold text-red-600">Get in Touch with us</h2>
@@ -197,6 +207,7 @@ export function BookingPopup({ isOpen, onClose }: BookingPopupProps) {
                                     placeholder="91234 56789"
                                     value={phoneNumber}
                                     onChange={handlePhoneChange}
+                                    onBlur={handlePhoneBlur}
                                     required
                                     className={`h-9 text-sm flex-1 ${phoneError ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
                                 />

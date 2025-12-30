@@ -83,16 +83,16 @@ export function Header() {
           isScrolled ? "bg-background/98 backdrop-blur-lg shadow-lg" : "bg-background/80 backdrop-blur-md shadow-sm",
         )}
       >
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="container mx-auto px-6 lg:px-12 max-w-7xl">
+          <div className="flex items-center justify-between h-14 lg:h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2">
               <img src="https://image2url.com/images/1765796822907-5d6e2d7e-9bfa-4ba7-ab5a-254ac83fb419.png" alt="Govira Logo" className="w-8 h-8" />
               <span className="font-semibold text-xl text-foreground">Govira</span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8">
+            {/* Desktop Navigation - Centered */}
+            <nav className="hidden lg:flex items-center gap-4 absolute left-1/2 transform -translate-x-1/2">
               {navItems.map((item) => {
                 if (item.hasDropdown) {
                   // Determine which dropdown data and state to use
